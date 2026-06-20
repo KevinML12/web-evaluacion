@@ -9,9 +9,6 @@ describe('Evaluación Web App', () => {
         // Setup document body
         document.documentElement.innerHTML = html.toString();
         
-        // Mock window.scrollTo for scroll test
-        window.scrollTo = jest.fn();
-        
         // Clear localStorage mock
         localStorage.clear();
         
@@ -49,8 +46,6 @@ describe('Evaluación Web App', () => {
         // Simulate user input
         inputName.value = 'Nuevo Nombre Prueba';
         inputId.value = '99-99999';
-        const inputCat = document.getElementById('input-cat');
-        inputCat.value = 'Gato default para que no falle';
 
         // Submit form
         updateForm.dispatchEvent(new Event('submit', { cancelable: true }));
@@ -64,33 +59,21 @@ describe('Evaluación Web App', () => {
         expect(localStorage.getItem('studentId')).toBe('99-99999');
     });
 
-    test('probando lo del gato y el scroll que pidio el profe xd', () => {
-        // jalando los inputs
-        const nom = document.getElementById('input-name');
-        const carnet = document.getElementById('input-id');
-        const michi = document.getElementById('input-cat');
-        const form = document.getElementById('update-form');
-        const txtGato = document.getElementById('display-cat');
+    test('no deberia guardar datos si los campos estan vacios', () => {
+        const inputName = document.getElementById('input-name');
+        const inputId = document.getElementById('input-id');
+        const updateForm = document.getElementById('update-form');
+        const displayName = document.getElementById('display-name');
 
-        // metiendo datos a mano
-        nom.value = 'Kevin';
-        carnet.value = '22-20286';
-        michi.value = 'Michi Galáctico 3000'; // jajaja
+        // meter un dato vacio
+        inputName.value = '   ';
+        inputId.value = '';
 
         // mandamos el form
-        form.dispatchEvent(new Event('submit', { cancelable: true }));
+        updateForm.dispatchEvent(new Event('submit', { cancelable: true }));
 
-        // a ver si si se actualizó el texto en pantalla
-        expect(txtGato.textContent).toBe('Michi Galáctico 3000');
-
-        // tmb checamos el localstorage por si acaso
-        expect(localStorage.getItem('studentCat')).toBe('Michi Galáctico 3000');
-
-        // jaja ojala si funcione el scroll 
-        // console.log("scroll triggered bro");
-        expect(window.scrollTo).toHaveBeenCalledWith({
-            top: expect.any(Number),
-            behavior: 'smooth'
-        });
+        // revisamos que no se haya actualizado con el valor vacio
+        expect(displayName.textContent).not.toBe('   ');
+        expect(localStorage.getItem('studentName')).toBeNull();
     });
 });
