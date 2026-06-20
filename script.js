@@ -47,12 +47,6 @@ document.addEventListener('DOMContentLoaded', () => {
             displayName.textContent = newName;
             displayId.textContent = newId;
 
-            // SCROLL FEATURE
-            window.scrollTo({
-                top: document.body.scrollHeight,
-                behavior: 'smooth'
-            });
-
             // Visual feedback
             const card = document.querySelector('.glass');
             card.classList.add('success-anim');
