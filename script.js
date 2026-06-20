@@ -65,12 +65,29 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
+    // Reset data
+    const resetData = () => {
+        localStorage.removeItem('studentName');
+        localStorage.removeItem('studentId');
+        loadData();
+
+        // Visual feedback
+        const btn = document.getElementById('reset-btn');
+        const originalText = btn.innerHTML;
+        btn.innerHTML = '<span>¡Restaurado! ↺</span>';
+        
+        setTimeout(() => {
+            btn.innerHTML = originalText;
+        }, 2000);
+    };
+
     // Initialize
     setTodayDate();
     loadData();
 
     // Event Listeners
     updateForm.addEventListener('submit', updateData);
+    document.getElementById('reset-btn').addEventListener('click', resetData);
 });
 
 // Export functions for testing (only if running in Node/Jest environment)
