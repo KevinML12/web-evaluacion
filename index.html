@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Evaluación - Datos del Estudiante</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="background-circles">
+        <div class="circle circle-1"></div>
+        <div class="circle circle-2"></div>
+    </div>
+    
+    <div class="container">
+        <div class="card glass">
+            <header>
+                <h1>Perfil de Evaluación</h1>
+                <p>Verifica y actualiza tus datos</p>
+            </header>
+            
+            <div class="info-display">
+                <div class="info-group">
+                    <span class="label">Nombre:</span>
+                    <span class="value" id="display-name">Kevin Alexander Méndez López</span>
+                </div>
+                <div class="info-group">
+                    <span class="label">Carné:</span>
+                    <span class="value" id="display-id">22-20286</span>
+                </div>
+                <div class="info-group">
+                    <span class="label">Fecha de Evaluación:</span>
+                    <span class="value" id="display-date"></span>
+                </div>
+            </div>
+
+            <div class="divider"></div>
+
+            <form id="update-form" class="edit-form">
+                <h2>Actualizar Datos</h2>
+                
+                <div class="input-group">
+                    <label for="input-name">Nombre Completo</label>
+                    <input type="text" id="input-name" required placeholder="Ej: Juan Pérez">
+                </div>
+                
+                <div class="input-group">
+                    <label for="input-id">Carné</label>
+                    <input type="text" id="input-id" required placeholder="Ej: 00-00000">
+                </div>
+                
+                <button type="submit" class="btn-primary" id="update-btn">
+                    <span>Actualizar Información</span>
+                </button>
+            </form>
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>

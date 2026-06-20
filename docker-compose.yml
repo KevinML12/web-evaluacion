@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+  web:
+    image: kevnml/web-evaluacion:v1.1.0
+    container_name: web-evaluacion
+    restart: always
+    # No exponemos puertos al host porque el túnel se comunicará internamente
+    # ports:
+    #   - "8080:80"
+    networks:
+      - tunnel_network
+
+  cloudflared:
+    image: cloudflare/cloudflared:latest
+    container_name: cloudflared-tunnel
+    restart: always
+    # Este comando usa "Quick Tunnels" que no requieren cuenta ni dominio.
+    # Te generará una URL aleatoria del tipo https://algo.trycloudflare.com
+    command: tunnel --url http://web:80
+    networks:
+      - tunnel_network
+    depends_on:
+      - web
+
+networks:
+  tunnel_network:
+    driver: bridge
